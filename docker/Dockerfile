@@ -1,13 +1,13 @@
 FROM nvidia/cuda:11.6.0-cudnn8-runtime-ubuntu20.04
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update
 RUN apt-get install sudo 
-RUN sudo apt install -qqy lsb-release gnupg2 curl -y
+RUN apt-get install -qqy lsb-release gnupg2 curl -y
 
 ENV TZ=Europe/Rome
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-ARG DEBIAN_FRONTEND=noninteractive
 
 # install ros
 RUN sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -59,7 +59,17 @@ RUN apt-get install python3-scipy \
                     python3-termcolor \
                     python3-pip -y
 
-RUN pip3 install cvxpy==1.2.0
-RUN pip3 install tesnroboard
-RUN pip3 install joblib
-RUN pip3 install torch
+COPY requirements.txt  requirements.txt 
+RUN pip3 install -r requirements.txt
+
+# install packages for real-robot
+RUN apt-get install ros-noetic-ur-msgs \
+                    ros-noetic-speed-scaling-interface \
+                    ros-noetic-scaled-joint-trajectory-controller \
+                    # ros-noetic-industrial-robots-status-interface \
+                    ros-noetic-speed-scaling-state-controller \
+                    ros-noetic-ur-client-library \
+                    ros-noetic-pass-through-controllers -y
+
+# install common command
+RUN apt-get install gitg git-cola nano tmux htop gedit -y
