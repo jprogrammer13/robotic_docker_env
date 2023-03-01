@@ -1,5 +1,8 @@
+--find-links https://download.pytorch.org/whl/torch_stable.html
+
 cvxpy==1.2.0
 numpy==1.17.4
 joblib==1.2.0
-torch==1.13.0
+torch==1.13.1
+torchvision==0.14.1
 tensorboard==2.11.0
