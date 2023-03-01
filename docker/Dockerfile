@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.6.0-cudnn8-runtime-ubuntu20.04
+FROM ubuntu:focal
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -72,4 +72,4 @@ RUN apt-get install ros-noetic-ur-msgs \
                     ros-noetic-pass-through-controllers -y
 
 # install common command
-RUN apt-get install gitg git-cola nano tmux htop gedit -y
+RUN apt-get install gitg git-cola nano tmux htop psmisc gedit -y

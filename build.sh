@@ -1,1 +1,1 @@
-docker build -t rbussola/robotic_docker:latest docker
+docker build -t rbussola/robotic_docker:cpu docker
