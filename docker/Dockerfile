@@ -71,5 +71,7 @@ RUN apt-get install ros-noetic-ur-msgs \
                     ros-noetic-ur-client-library \
                     ros-noetic-pass-through-controllers -y
 
+RUN apt-get install robotpkg-py3\*-example-robot-data -y
+
 # install common command
 RUN apt-get install gitg git-cola nano tmux htop psmisc gedit -y
